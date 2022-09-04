@@ -68,6 +68,14 @@ import special_nuke from './uno cards/special/special_nuke.png'
 import React, {useState} from 'react'
 import logo from './logo.svg';
 import './App.css';
+import { hop } from "@onehop/client";
+import { useChannelMessage } from '@onehop/react';
+ 
+// hop.init should be called as early as possible in your application's lifecycle
+hop.init({
+	projectId: "project_NTAzOTY5OTg4MDM4NTc0NDA" // replace with your project ID
+});
+ 
 
 let game_cards = [red_0, red_1, red_2, red_3, red_4, red_5, red_6, red_7, red_8, red_9, red_reverse, red_draw_2, red_skip,
   blue_0, blue_1, blue_2, blue_3, blue_4, blue_5, blue_6, blue_7, blue_8, blue_9, blue_reverse, blue_draw_2, blue_skip,
@@ -81,7 +89,23 @@ let chips = 50
 let discard_card = red_0
 let exp_discard_card = undefined
 
+
+ 
+const channelId = 'testChannel';
+
 function App() {
+
+  const [chatMessages, setChatMessages] = useState([]);
+
+  console.log(chatMessages)
+
+  
+ 
+	//in this example, USER_MESSAGE is an event that you'd send to the channel from your backend
+	useChannelMessage(channelId, 'USER_MESSAGE', (message) => {
+		// this will be called every time the USER_MESSAGE event is sent to this channel
+	//setChatMessages(m => [...m, "hello"]);
+	}); 
 
   for (let i=0; i < 7; i++){
     player_cards[i] = game_cards[Math.floor(Math.random() * 54)]
@@ -92,7 +116,6 @@ function App() {
   
   exp_discard_card = <img src={discard_card} alt="Yello1"/>
 
-  const [chatMessages, setChatMessages] = useState([]);
   return (
     <div className="App">
       <div className="Title">
@@ -129,6 +152,11 @@ function App() {
       {export_cards[8]}
       {export_cards[9]}
       {export_cards[10]}
+      <ul>
+			{chatMessages.map(m => (
+				<li><b>{m.author}</b>: {m.content}</li>
+			))}
+		</ul>
       <div className="Discard">
         <h3>Discard pile:</h3>
         {exp_discard_card}
