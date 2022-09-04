@@ -96,6 +96,10 @@ const channelId = 'testChannel';
 
 function App() {
 
+  function PlayCard(btnNumber) {
+    console.log("You played card" + btnNumber)
+  }
+
   const [chatMessages, setChatMessages] = useState([]);
 
   console.log(chatMessages)
@@ -113,7 +117,7 @@ function App() {
   }
   for (let i=0; i < player_cards.length; i++) {
     export_cards[i] = <img src={player_cards[i]} alt="Yello1"/>
-    export_buttons[i] = <button>Play</button>
+    export_buttons[i] = <button onClick={PlayCard(i)}>Play</button>
   }
   
   exp_discard_card = <img src={discard_card} alt="Yello1"/>
