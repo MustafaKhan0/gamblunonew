@@ -76,15 +76,16 @@ hop.init({
 	projectId: "project_NTAzOTY5OTg4MDM4NTc0NDA" // replace with your project ID
 });
  
-
+//#region array
 let game_cards = [red_0, red_1, red_2, red_3, red_4, red_5, red_6, red_7, red_8, red_9, red_reverse, red_draw_2, red_skip,
   blue_0, blue_1, blue_2, blue_3, blue_4, blue_5, blue_6, blue_7, blue_8, blue_9, blue_reverse, blue_draw_2, blue_skip,
   green_0, green_1, green_2, green_3, green_4, green_5, green_6, green_7, green_8, green_9, green_reverse, green_draw_2, green_skip,
   yellow_0, yellow_1, yellow_2, yellow_3, yellow_4, yellow_5, yellow_6, yellow_7, yellow_8, yellow_9, yellow_reverse, yellow_draw_2, yellow_skip,
   special_nuke, special_wild]
-
+//#endregion
 let player_cards = [red_0, red_0, red_0, red_0,red_0,red_0,red_0]
 let export_cards = new Array(11)
+let export_buttons = new Array(11)
 let chips = 50
 let discard_card = red_0
 let exp_discard_card = undefined
@@ -102,16 +103,17 @@ function App() {
   
  
 	//in this example, USER_MESSAGE is an event that you'd send to the channel from your backend
-	useChannelMessage(channelId, 'USER_MESSAGE', (message) => {
+	/*useChannelMessage(channelId, 'USER_MESSAGE', (message) => {
 		// this will be called every time the USER_MESSAGE event is sent to this channel
 	//setChatMessages(m => [...m, "hello"]);
-	}); 
+	}); */
 
   for (let i=0; i < 7; i++){
     player_cards[i] = game_cards[Math.floor(Math.random() * 54)]
   }
   for (let i=0; i < player_cards.length; i++) {
     export_cards[i] = <img src={player_cards[i]} alt="Yello1"/>
+    export_buttons[i] = <button>Play</button>
   }
   
   exp_discard_card = <img src={discard_card} alt="Yello1"/>
@@ -142,16 +144,27 @@ function App() {
       </div>
       <p className="urCards">Your cards:</p>
       {export_cards[0]}
+      {export_buttons[0]}
       {export_cards[1]}
+      {export_buttons[1]}
       {export_cards[2]}
+      {export_buttons[2]}
       {export_cards[3]}
+      {export_buttons[3]}
       {export_cards[4]}
+      {export_buttons[4]}
       {export_cards[5]}
+      {export_buttons[5]}
       {export_cards[6]}
+      {export_buttons[6]}
       {export_cards[7]}
+      {export_buttons[7]}
       {export_cards[8]}
+      {export_buttons[8]}
       {export_cards[9]}
+      {export_buttons[9]}
       {export_cards[10]}
+      {export_buttons[10]}
       <ul>
 			{chatMessages.map(m => (
 				<li><b>{m.author}</b>: {m.content}</li>
